@@ -1,20 +1,25 @@
 import { getSymbolInfoByCode } from '@arbitrage-toolbox/shared';
+let isTrigger = false;
 const initModals = () => {
   document.body.classList.add('content-ui-body-login-hide');
+  const recover = () => {
+    if (isTrigger) return;
+    isTrigger = true;
+    const modalParent = document.querySelector('.modals');
+    if (modalParent) {
+      modalParent.classList.remove('js-shown');
+      document.body.classList.remove('content-ui-body-login-hide');
+      document.body.classList.remove('scroll-no');
+    }
+  };
   document.addEventListener('DOMContentLoaded', () => {
-    console.log('[扩展] DOMContentLoaded 已触发');
-    //   // 在此执行操作：修改 DOM、绑定事件等
     setTimeout(() => {
-      const modalParent = document.querySelector('.modals');
-      if (modalParent) {
-        console.log('modalParent', modalParent);
-        modalParent.classList.remove('js-shown');
-        document.body.classList.remove('content-ui-body-login-hide');
-        document.body.classList.remove('scroll-no');
-      }
-    }, 300);
+      recover();
+    }, 50);
   });
-  console.log('init modals');
+  setTimeout(() => {
+    recover();
+  }, 200);
 };
 
 export const initXueqiu = () => {
