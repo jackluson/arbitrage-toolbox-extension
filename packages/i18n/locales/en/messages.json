@@ -1,0 +1,30 @@
+{
+  "extensionDescription": {
+    "description": "Extension description",
+    "message": "在雪球行情页，您可以轻松地查看LOF、ETF的溢价情况,并且提供了跳转同花顺、东方财富、集思录等网站的功能，方便您进行更深入分析"
+  },
+  "extensionName": {
+    "description": "Extension name",
+    "message": "套利工具箱 -- 专注于LOF、ETF溢价套利"
+  },
+  "toggleTheme": {
+    "message": "Toggle theme"
+  },
+  "loading": {
+    "message": "Loading..."
+  },
+  "greeting": {
+    "description": "Greeting message",
+    "message": "Hello, My name is $NAME$",
+    "placeholders": {
+      "name": {
+        "content": "$1",
+        "example": "John Doe"
+      }
+    }
+  },
+  "hello": {
+    "description": "Placeholder example",
+    "message": "Hello $1"
+  }
+}

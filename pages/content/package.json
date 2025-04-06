@@ -1,0 +1,32 @@
+{
+  "name": "@arbitrage-toolbox/content-script",
+  "version": "0.8.0",
+  "description": "chrome extension - content script",
+  "type": "module",
+  "private": true,
+  "sideEffects": true,
+  "files": [
+    "dist/**"
+  ],
+  "scripts": {
+    "clean:node_modules": "pnpx rimraf node_modules",
+    "clean:turbo": "rimraf .turbo",
+    "clean": "pnpm clean:turbo && pnpm clean:node_modules",
+    "build": "vite build",
+    "dev": "vite build --mode development",
+    "lint": "eslint .",
+    "lint:fix": "pnpm lint --fix",
+    "prettier": "prettier . --write --ignore-path ../../.prettierignore",
+    "type-check": "tsc --noEmit"
+  },
+  "dependencies": {
+    "@arbitrage-toolbox/shared": "workspace:*",
+    "@arbitrage-toolbox/storage": "workspace:*",
+    "@arbitrage-toolbox/env": "workspace:*"
+  },
+  "devDependencies": {
+    "@arbitrage-toolbox/hmr": "workspace:*",
+    "@arbitrage-toolbox/tsconfig": "workspace:*",
+    "@arbitrage-toolbox/vite-config": "workspace:*"
+  }
+}
