@@ -50,7 +50,10 @@ export const initXueqiu = () => {
       if (symbolInfo.isUS) dongfangcaifu = 'https://quote.eastmoney.com/us/' + code + '.html';
       if (symbolInfo.isHK) dongfangcaifu = 'https://quote.eastmoney.com/hk/' + code + '.html';
       chart_container.insertAdjacentHTML('beforebegin', renderLabel('东方财富', dongfangcaifu));
-
+      if (symbolInfo.isLOF || symbolInfo.isETF) {
+        const tiantianFund = `https://fund.eastmoney.com/${code}.html`;
+        chart_container.insertAdjacentHTML('beforebegin', renderLabel('天天基金', tiantianFund));
+      }
       if (!symbolInfo.isUS && !symbolInfo.isHK) {
         //集思录、i问财、 看财报只有a股
         let jisilu = '';
@@ -64,16 +67,18 @@ export const initXueqiu = () => {
         chart_container.insertAdjacentHTML('beforebegin', renderLabel('集思录', jisilu));
         const iwencai = 'https://www.iwencai.com/unifiedwap/result?w=' + stockCode;
         chart_container.insertAdjacentHTML('beforebegin', renderLabel('i问财', iwencai));
-        const kancaibao = 'https://pro.kancaibao.com/app/company_main/?stockcode=' + stockCode;
-        chart_container.insertAdjacentHTML('beforebegin', renderLabel('看财报', kancaibao));
-        const lixinger =
-          'https://www.lixinger.com/analytics/company/detail/' +
-          symbolInfo.prefix.toLocaleLowerCase() +
-          '/' +
-          stockCode +
-          '/' +
-          stockCode;
-        chart_container.insertAdjacentHTML('beforebegin', renderLabel('理杏仁', lixinger));
+        if (!symbolInfo.isLOF && symbolInfo.isETF) {
+          const kancaibao = 'https://pro.kancaibao.com/app/company_main/?stockcode=' + stockCode;
+          chart_container.insertAdjacentHTML('beforebegin', renderLabel('看财报', kancaibao));
+          const lixinger =
+            'https://www.lixinger.com/analytics/company/detail/' +
+            symbolInfo.prefix.toLocaleLowerCase() +
+            '/' +
+            stockCode +
+            '/' +
+            stockCode;
+          chart_container.insertAdjacentHTML('beforebegin', renderLabel('理杏仁', lixinger));
+        }
       }
     }
   }

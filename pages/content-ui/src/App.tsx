@@ -5,6 +5,42 @@ import { t } from '@arbitrage-toolbox/i18n';
 
 let rerenderTimer = null as unknown as NodeJS.Timeout;
 
+const upsertAdjacentElement = (
+  selectTdNodefirstChild: HTMLSpanElement,
+  selectTdNodeChildredCount: number,
+  fundMapItem: Record<string, any>,
+  prop: string,
+  label: string,
+  unit: string,
+  unitPer = 1,
+) => {
+  if (selectTdNodefirstChild && fundMapItem) {
+    selectTdNodefirstChild.style.width = 'auto';
+    const createSpan = document.createElement('span');
+    const propValue = Math.round((fundMapItem[prop] * 100) / unitPer) / 100;
+    if (selectTdNodeChildredCount > 1) {
+      selectTdNodefirstChild.innerHTML = `${label}:${propValue}${unit}`;
+    } else {
+      createSpan.className = 'inline';
+      createSpan.innerHTML = `${label}:${propValue}${unit}`;
+      createSpan.style.width = 'auto';
+      if (unit === '%') {
+        createSpan.style.color = propValue > 0 ? '#ee2500' : propValue === 0 ? '#000' : '#093';
+      } else {
+        createSpan.style.color = '#000';
+      }
+      createSpan.style.marginRight = '12px';
+      selectTdNodefirstChild.insertAdjacentElement('beforebegin', createSpan);
+    }
+  } else {
+    if (fundMapItem) {
+      console.log('selectTdNodefirstChild not found', selectTdNodefirstChild);
+    } else {
+      console.log('fundMapItem not found');
+    }
+  }
+};
+
 export default function App() {
   // const fundMap = useStorage(fundMapStorage);
   // console.log("fundMap", fundMap);
@@ -20,33 +56,48 @@ export default function App() {
           const symbolNode = tdNodes[0];
           const symbolText = symbolNode.textContent;
           const fundMapItem = fundMap[symbolText!];
-          const selectTdNode = tdNodes[4];
+          let selectTdNode = tdNodes[4];
           const selectTdNodefirstChild = selectTdNode.firstChild as HTMLSpanElement;
-          const selectTdNodeChildredCount = selectTdNode.childElementCount;
-          if (selectTdNodefirstChild && fundMapItem) {
-            // selectTdNodeLastChild.classList.add('flex');
-            // selectTdNodeLastChild.style.display = 'flex';
-            // selectTdNodeLastChild.style.gap = '16px';
-            selectTdNodefirstChild.style.width = 'auto';
-            const createSpan = document.createElement('span');
-            const premiumRate = Math.round(fundMapItem['premium_rate'] * 100) / 100;
-            if (selectTdNodeChildredCount > 1) {
-              selectTdNodefirstChild.innerHTML = `溢价：${premiumRate}%`;
-            } else {
-              createSpan.className = 'inline';
-              createSpan.innerHTML = `溢价：${premiumRate}%`;
-              createSpan.style.width = 'auto';
-              createSpan.style.color = premiumRate > 0 ? '#ee2500' : premiumRate === 0 ? '#000' : '#093';
-              createSpan.style.marginRight = '12px';
-              selectTdNodefirstChild.insertAdjacentElement('beforebegin', createSpan);
-            }
-          } else {
-            if (fundMapItem) {
-              console.log('selectTdNodefirstChild not found', selectTdNodefirstChild);
-            } else {
-              console.log('fundMapItem not found', symbolText);
-            }
-          }
+          upsertAdjacentElement(
+            selectTdNodefirstChild,
+            selectTdNode.childElementCount,
+            fundMapItem,
+            'premium_rate',
+            '溢价率',
+            '%',
+          );
+          selectTdNode = tdNodes[3];
+          upsertAdjacentElement(
+            selectTdNode.firstChild as HTMLSpanElement,
+            selectTdNode.childElementCount,
+            fundMapItem,
+            'market_capital',
+            '市值',
+            '亿元',
+            100000000,
+          );
+          selectTdNode = tdNodes[5];
+          upsertAdjacentElement(
+            selectTdNode.firstChild as HTMLSpanElement,
+            selectTdNode.childElementCount,
+            fundMapItem,
+            'amount',
+            '成交额',
+            '万元',
+            10000,
+          );
+          selectTdNode = tdNodes[2];
+          upsertAdjacentElement(
+            selectTdNode.firstChild as HTMLSpanElement,
+            selectTdNode.childElementCount,
+            fundMapItem,
+            'current_year_percent',
+            '年涨幅',
+            '%',
+            1,
+          );
+
+          const marketCapital = Math.round((fundMapItem['market_capital'] / 10 ** 8) * 100) / 100;
         }
       }
     }
