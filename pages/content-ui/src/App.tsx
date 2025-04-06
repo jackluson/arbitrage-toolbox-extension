@@ -1,6 +1,5 @@
 import { useEffect } from 'react';
-import { ToggleButton } from '@arbitrage-toolbox/ui';
-import { exampleThemeStorage, fundMapStorage } from '@arbitrage-toolbox/storage';
+import { fundMapStorage } from '@arbitrage-toolbox/storage';
 import { t } from '@arbitrage-toolbox/i18n';
 
 let rerenderTimer = null as unknown as NodeJS.Timeout;
@@ -54,8 +53,16 @@ export default function App() {
         for (const trNode of Array.from(trNodes)) {
           const tdNodes = trNode.querySelectorAll('td');
           const symbolNode = tdNodes[0];
-          const symbolText = symbolNode.textContent;
+          const symbolText = symbolNode.textContent?.slice(0, 8) || '';
           const fundMapItem = fundMap[symbolText!];
+          if (!fundMapItem) {
+            continue;
+          }
+          const etfTypes = fundMapItem.etf_types;
+          const isT0 = etfTypes && etfTypes.includes('283013005');
+          if (isT0 && symbolNode.firstChild && symbolNode.firstChild.firstChild) {
+            symbolNode.firstChild.firstChild.textContent = isT0 ? `${symbolText}(T+0)` : symbolText;
+          }
           let selectTdNode = tdNodes[4];
           const selectTdNodefirstChild = selectTdNode.firstChild as HTMLSpanElement;
           upsertAdjacentElement(
@@ -96,8 +103,6 @@ export default function App() {
             '%',
             1,
           );
-
-          const marketCapital = Math.round((fundMapItem['market_capital'] / 10 ** 8) * 100) / 100;
         }
       }
     }
