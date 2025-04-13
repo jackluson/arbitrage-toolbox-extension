@@ -32,7 +32,7 @@ const manifest = {
   version: packageJson.version,
   description: '__MSG_extensionDescription__',
   host_permissions: [...matches],
-  permissions: ['storage', 'scripting', 'webRequest'],
+  permissions: ['storage', 'scripting'],
   background: {
     service_worker: 'background.js',
     type: 'module',
