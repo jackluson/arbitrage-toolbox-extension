@@ -59,7 +59,12 @@ export default function App() {
             continue;
           }
           const etfTypes = fundMapItem.etf_types;
-          const isT0 = etfTypes && etfTypes.includes('283013005');
+          const isT0 =
+            etfTypes &&
+            (etfTypes.includes('283013005') ||
+              etfTypes.includes('283013002') ||
+              etfTypes.includes('283021003') ||
+              etfTypes.includes('283013001'));
           if (isT0 && symbolNode.firstChild && symbolNode.firstChild.firstChild) {
             symbolNode.firstChild.firstChild.textContent = isT0 ? `${symbolText}(T+0)` : symbolText;
           }

@@ -58,7 +58,7 @@ const Popup = () => {
             <Settings size={20} />
           </Button> */}
         </header>
-        <main className="p-4 min-h-[200px] ">
+        <main className="p-4 min-h-[100px] ">
           <div className="flex justify-start items-center">
             <span className="text-base text-foreground/80 font-bold mr-2">入口:</span>
             <a
@@ -74,28 +74,35 @@ const Popup = () => {
               href="https://xueqiu.com/hq/detail?name=ETF&market=CN&first_name=4&second_name=7&parentType=1&type=18&source=fund"
               target="_blank"
               rel="noopener noreferrer">
-              ETF{' '}
+              ETF
             </a>
           </div>
         </main>
-        <footer className="text-center justify-center p-4 w-full flex items-center border-t border-border/90 bg-[#f0f8ff]">
-          <span>
-            <Copyright size={16} />
-          </span>
-          <a
-            className="items-center mx-1 text-sm underline "
-            href="https://github.com/jackluson"
-            target="_blank"
-            rel="noopener noreferrer">
-            jackluson
-          </a>
-          <a href="https://github.com/jackluson" target="_blank" rel="noopener noreferrer">
-            <img
-              src={chrome.runtime.getURL('popup/github.svg')}
-              className="h-4 w-4 overflow-hidden object-contain "
-              alt="logo"
-            />
-          </a>
+        <footer className="text-center justify-center p-4 w-full flex flex-col items-center border-t border-border/90 bg-[#f0f8ff]">
+          <div className="text-center justify-center w-full flex items-center">
+            <span>
+              <Copyright size={16} />
+            </span>
+            <a
+              className="items-center mx-1 text-sm underline "
+              href="https://github.com/jackluson"
+              target="_blank"
+              rel="noopener noreferrer">
+              jackluson
+            </a>
+            <a href="https://github.com/jackluson" target="_blank" rel="noopener noreferrer">
+              <img
+                src={chrome.runtime.getURL('popup/github.svg')}
+                className="h-4 w-4 overflow-hidden object-contain "
+                alt="logo"
+              />
+            </a>
+          </div>
+          <div className="mt-1">
+            <p>
+              私有定制欢迎联系微信：<span className="text-orange-600">breadwinner-lu</span>
+            </p>
+          </div>
         </footer>
       </div>
     );

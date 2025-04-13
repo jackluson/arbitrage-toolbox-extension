@@ -17,6 +17,8 @@ const packageJson = JSON.parse(readFileSync('./package.json', 'utf8'));
  * @prop content_scripts
  * css: ['content.css'], // public folder
  */
+// 'http://*/*', 'https://*/*', '<all_urls>'
+const matches = ['https://xueqiu.com/*'];
 const manifest = {
   manifest_version: 3,
   default_locale: 'en',
@@ -29,8 +31,8 @@ const manifest = {
   },
   version: packageJson.version,
   description: '__MSG_extensionDescription__',
-  host_permissions: ['<all_urls>'],
-  permissions: ['storage', 'scripting', 'tabs', 'notifications', 'webRequest'],
+  host_permissions: [...matches],
+  permissions: ['storage', 'scripting', 'webRequest'],
   background: {
     service_worker: 'background.js',
     type: 'module',
@@ -45,16 +47,16 @@ const manifest = {
   },
   content_scripts: [
     {
-      matches: ['http://*/*', 'https://*/*', '<all_urls>'],
+      matches: [...matches],
       js: ['content/index.iife.js'],
       run_at: 'document_start',
     },
     {
-      matches: ['http://*/*', 'https://*/*', '<all_urls>'],
+      matches: [...matches],
       js: ['content-ui/index.iife.js'],
     },
     {
-      matches: ['http://*/*', 'https://*/*', '<all_urls>'],
+      matches: [...matches],
       css: ['content.css'],
       run_at: 'document_start',
     },
