@@ -1,8 +1,0 @@
-{
-  "extends": "@arbitrage-toolbox/tsconfig/module",
-  "compilerOptions": {
-    "baseUrl": ".",
-    "outDir": "dist"
-  },
-  "include": ["lib", "index.mts"]
-}

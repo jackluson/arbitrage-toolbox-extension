@@ -6,6 +6,7 @@
 
 # build
 **/dist
+!/dist
 **/build
 **/dist-zip
 chrome-extension/manifest.js
