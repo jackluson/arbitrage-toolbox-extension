@@ -6,7 +6,7 @@
 - [Edge插件市场](https://microsoftedge.microsoft.com/addons/detail/jkldbgmdgnchlefokomnklpkolbhihoj)
 
 ## 功能
-- 借助雪球行情页展示 ETF、LOF 溢价
+- 借助雪球行情页展示 ETF、LOF 溢价、估算溢价率、成交额、市值、规模变动、申购限额等
 - 详情页提供其他平台跳转操作 -- 同花顺、东方财富、集思录等
 
 ### 使用截图
@@ -22,3 +22,9 @@ ETF行情页
 
 基金详情页
 ![基金详情页](./screenshots/detail.png)
+
+
+### 其他工具
+
+- [债券理论价值计算器](https://bond-calculator.anchor-data.cn/)
+- [雪球网增强数据助手](https://chromewebstore.google.com/detail/ndmhfodnpgmmfpcigjkboipnbffjibjg)
