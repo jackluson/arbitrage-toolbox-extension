@@ -28,3 +28,4 @@ ETF行情页
 
 - [债券理论价值计算器](https://bond-calculator.anchor-data.cn/)
 - [雪球网增强数据助手](https://chromewebstore.google.com/detail/ndmhfodnpgmmfpcigjkboipnbffjibjg)
+- [锚点数据平台](https://www.anchor-data.cn/)
